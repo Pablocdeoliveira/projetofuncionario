@@ -1,0 +1,39 @@
+package br.edu.senaisp.util;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.util.Date;
+
+import br.edu.senaisp.model.Aluno;
+
+public class Log {
+
+	private String pathArquivo = "C:\\temp\\log\\";
+
+	private boolean escrever(String msg) throws IOException {
+
+		String pathDestino = pathArquivo + LocalDate.now().getYear() + "_" + LocalDate.now().getDayOfMonth() + "_"
+				+ LocalDate.now().getMonth() + ".log";
+
+		try {
+			PrintWriter pw = new PrintWriter("pathDestino", Charset.forName("UTF-8"));
+
+			pw.println(msg);
+
+			pw.close();
+			return true;
+
+		} catch (FileNotFoundException e) {
+
+			System.out.println("Erro: " + e.getLocalizedMessage());
+
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+
+}
